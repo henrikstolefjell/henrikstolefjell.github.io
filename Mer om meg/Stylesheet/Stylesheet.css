@@ -1,0 +1,76 @@
+body {
+    background-image: url(Background8.img);
+    background-size: cover;
+    margin: 0;
+}
+
+
+header {
+    background-image: url(Background10.img); 
+    padding: 20px; 
+    text-align: center; 
+    font-size: 40px; 
+}
+
+.headerlinker {
+    color: aqua;
+}
+
+
+nav {
+    float: left; 
+    width: 20%; 
+    height: 100%; 
+    padding: 0px; 
+    text-align: left;
+}
+
+.linker {
+    color: aqua;
+    font-size: 20px;
+    text-decoration: none;
+}
+
+
+article {
+    float: right; 
+    padding-left: 0px; 
+    width: 70%; 
+    background-color: inherit; 
+    height: 300px;
+    text-align: left;
+}
+     
+#hjemlink {
+    text-align: center
+}
+
+#hjemfarge{
+    color: black
+}
+
+footer {
+    padding: 0px; 
+    text-align: center;
+    color: black;
+    margin-top: 650px;
+    margin-right: 350px;
+}
+
+#link{
+    color: black;
+}
+
+
+
+.linker:hover {
+    position: absolute;
+}
+
+
+a:hover {
+    background-image: url(hoverbilde4.img);
+    background-size: contain;
+    background-position: center;
+    color: chartreuse;
+}
