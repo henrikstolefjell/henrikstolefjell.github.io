@@ -1,84 +1,98 @@
 <html>
-    
-    <head> 
-        <meta charset="utf-8">
-        
-        <title> Stolefjell.com </title>
-        
-        <link rel="stylesheet" href="Stylesheet/Stylesheet.css">  
-    </head>
-    
-    <body>
-        
-        <header>
-            <h2> 
-                <a href=https://no.wikipedia.org/wiki/Henrik class="headerlinker"> Henrik </a> 
-                <a href=https://www.kjentmannsmerket.org/Stolefjell.htm; class="headerlinker"> Stølefjell</a> 
-            </h2>
-        </header>
-        
-        <nav>
-            <P> 
-                <br>
-                &nbsp; &nbsp; <a href=https://www.gucci.com/no/en_gb/?gclid=Cj0KCQjw753rBRCVARIsANe3o47z5KhuVNJAuR-9x9UIy7UwgQHag18gM-fF_42LwZpqRxM-qEBckO4aAiH2EALw_wcB&gclsrc=aw.ds; class="linker"> Min garderobe </a>
-                <br>
-                <br>
-                &nbsp; &nbsp; <a href="file:///C:/Users/Henrik/Documents/webiseder/IT/2%20Webside/Din%20garderobe/index.html"; class="linker"> Din garderobe </a>
-                <br>
-                <br>
-                &nbsp; &nbsp; <a href="CV/CV.html"; class="linker"> CV </a>
-                <br>
-                <br>
-                &nbsp; &nbsp; <a href="https://no.wikipedia.org/wiki/Trondheim"; class="linker"> Bosted </a>
-                <br>
-                <br>
-                &nbsp; &nbsp; <a href="https://no.wikipedia.org/wiki/Arendal"; class="linker"> Fødested </a>
-                <br>
-                <br>
-                &nbsp; &nbsp; <a href="https://no.wikipedia.org/wiki/Monaco"; class="linker"> Fremtidige bosted </a>
-                <br>
-                <br>
-                &nbsp; &nbsp; <a href="file:///C:/Users/Henrik/Documents/webiseder/IT/2%20Webside/Lek%20og%20moro/Mellomlink%20til%20lek%20og%20moro/index.html"; class="linker"> Lek og moro
-                </a> 
-                <br>
-                <br>
-                &nbsp; &nbsp; <a href="Mer%20om%20meg/index.html"; class="linker"> Mer om meg
-                </a>
-            </P>
-        </nav>
-        
-        <article> 
-            <p>
-                Heisann! <br> 
-                Mitt navn er Henrik Stølfjell.<br> 
-                Jeg spiller 
-                <a href=https://no.wikipedia.org/wiki/H%C3%A5ndball class="linker2"> håndball </a> 
-                på 
-                <a href=https://no.wikipedia.org/wiki/Fritid class="linker2"> fritiden</a>
-                , og er ellers sammen med 
-                <a href=https://no.wikipedia.org/wiki/Vennskap class="linker2"> venner.</a> 
-            </p> 
-            <image src="Gif.img" style="height: 270px">
-            </image>
-            
-            
-            
-        </article>
-        
-        <footer> 
-            <p>
-                
-                Du er nå kommet til bunnen, vennligst scroll <a href="index.html"; id="link"> opp </a>
-                <br>
-                (Du kan gjerne vippse et par spenn til 93689885, for å støtte en god sak)
-                <audio style="height: 15px; width: 15px" src="videoplayback%20(1).mp3" controls>
-            </audio>
-            </p>
-             
-            
-            
-        </footer>
 
-    </body>
-    
+<head>
+    <meta charset="utf-8">
+    <title>Gjesteliste</title>
+</head>
+
+<body>
+    <form>
+        <h1>Gjesteliste</h1>
+        <p>Skriv inn navnet ditt og en hilsen.</p>
+
+        <p>
+            <input id="txtNavn" type="text" placeholder="Navn" required autocomplete="off">
+        </p>
+
+        <p>
+            <textarea id="txtMelding" type="text" placeholder="Melding" required></textarea>
+        </p>
+
+        <p>
+            <input id="btnLeggInn" submit type="submit" onclick="leggInn(); visDatabase()" value="Legg inn">
+        </p>
+    </form>
+    <div id="gjestebok"></div>
+
+    <script>
+        let txtNavn = document.querySelector("#txtNavn")
+        let txtMelding = document.querySelector("#txtMelding")
+        let gjestebok = document.querySelector("#gjestebok")
+        let teller = 0
+
+        function leggInn() {
+            let Navn = txtNavn.value;
+            let Melding = txtMelding.value;
+
+            teller++
+
+            gjestebok.innerHTML += `<div>${teller}. ${Navn} ${Melding}</div>`
+        }
+
+    </script>
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.9.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.9.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.9.1/firebase-database.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+https://firebase.google.com/docs/web/setup#available-libraries -->
+
+    <script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyAyCy1K1DgMl2UN-zqiEf17zeW-UhOewfg",
+            authDomain: "gjestebok-fe7ee.firebaseapp.com",
+            databaseURL: "https://gjestebok-fe7ee.firebaseio.com",
+            projectId: "gjestebok-fe7ee",
+            storageBucket: "gjestebok-fe7ee.appspot.com",
+            messagingSenderId: "320164826413",
+            appId: "1:320164826413:web:d2df2c24049b9f874b97a4"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+
+        let db = firebase.database();
+        let gjestebok_tabell = db.ref("gjestebok");
+
+        function leggInn() {
+            var Navn_in = document.getElementById("txtNavn").value;
+            var Melding_in = document.getElementById("txtMelding").value;
+            var today = new Date();
+            var dataTime = today.getFullYear() + "0" + today.getMonth() + 1 + "" + today.getDate() + "" + today.getHours() + "" + today.getMinutes() + "" + today.getSeconds();
+
+            let new_object = gjestebok_tabell.child(dataTime);
+
+            gjestebok_tabell.set({
+                Navn: Navn_in,
+                Melding: Melding_in
+            });
+
+            window.alert("Melding lagt inn i databasen")
+        }
+
+        function visDatabase() {
+            function visDatabase_hjelpefunksjon(snapshot) {
+                let timestamp = snapshot.key;
+                let navn_og_tekst = snapshot.val();
+                gjestebok.innerHTML += `<div>Navn: ${navn_og_tekst.Navn} - Melding: ${navn_og_tekst.Melding}</div>`;
+            }
+            gjestebok_tabell.on("child_added", visDatabase_hjelpefunksjon);
+        }
+
+    </script>
+
+</body>
+
 </html>
